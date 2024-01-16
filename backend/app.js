@@ -1,19 +1,27 @@
 const express = require("express");
+const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
 const app = express();
 const cors = require("cors");
 const config = { port: process.env.PORT || 3000 };
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4,
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4,
+  }
+})
 
 // middleware
 app.use(cors());
 
 // your API route(s) here
 app.get("/lorem", (req, res) => {
-  const lorem = {
-    lorem:
-      "Dolor esse cupidatat ipsum commodo ut duis id esse voluptate. Consectetur cupidatat non qui sint amet minim aute aliquip.",
-  };
-  res.send(lorem);
+  res.json({lorem: lorem.generateSentences(8)})
 });
 
 app.get("*", function (req, res) {
