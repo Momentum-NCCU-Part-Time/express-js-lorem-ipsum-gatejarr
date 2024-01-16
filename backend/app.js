@@ -21,7 +21,7 @@ app.use(cors());
 
 // your API route(s) here
 app.get("/lorem", (req, res) => {
-  res.json({lorem: lorem.generateSentences(8)})
+  res.json({"lorem": lorem.generateSentences(8)})
 });
 
 app.get("*", function (req, res) {
